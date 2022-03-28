@@ -1,0 +1,24 @@
+{
+  "semi": true,
+  "trailingComma": "all",
+  "singleQuote": true,
+  "arrowParens": "always",
+  "printWidth": 80,
+  "indent_size": 2,
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "overrides": [
+    {
+      "files": "*.{js,jsx,tsx,ts,scss,json,html}",
+      "options": {
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": "*.{json}",
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
+}
