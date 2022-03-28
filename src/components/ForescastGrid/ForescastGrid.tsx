@@ -25,7 +25,7 @@ function ForecastGrid({ results }: Props) {
         let current = index;
         let next = index + 1;
 
-        if (index % 2 !== 0 && next < results.length) {
+        if (index % 2 === 0 && next < results.length) {
           return (
             <Grid key={index} item className={classes.gridContainer}>
               <Card sx={{ minWidth: 250 }}>
@@ -54,7 +54,7 @@ function ForecastGrid({ results }: Props) {
               </Card>
             </Grid>
           );
-        } else if (index % 2 !== 0 && next <= results.length) {
+        } else if ((index % 2 === 0 && next <= results.length) || index === 0) {
           return (
             <Grid key={index + 50} item style={{ right: '5px' }}>
               <Card sx={{ minWidth: 275 }}>
