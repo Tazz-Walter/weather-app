@@ -90,7 +90,9 @@ describe('Weather forecast: Render', () => {
     //@ts-ignore
     expect(inputState.value).toBe('');
     // Shows the error
-    expect(screen.getByText('required to complete the state')).toBeTruthy();
+    expect(
+      screen.getByText('Required to complete the state Ex. MD'),
+    ).toBeTruthy();
 
     fireEvent.change(inputState, {
       target: { value: 'asdfg' },
@@ -127,7 +129,6 @@ describe('Weather forecast: Render', () => {
         )
         .reply(200, getForestcastMock);
     });
-
     expect(screen.getByText('Monday')).toBeTruthy();
     expect(screen.getAllByText('Mon 28/03').length).toBe(2);
     expect(screen.getByText('Temperature: 40 F')).toBeTruthy();

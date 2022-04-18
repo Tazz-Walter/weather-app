@@ -25,15 +25,43 @@ function ForecastGrid({ results }: Props) {
         let current = index;
         let next = index + 1;
 
-        if (index % 2 === 0 && next < results.length) {
+        const dateBefore =
+          index >= 1 && results[index - 1]
+            ? format(parseISO(results[index - 1].startTime), 'EEE dd/MM')
+            : '';
+        const currentDate = format(
+          parseISO(results[current].startTime),
+          'EEE dd/MM',
+        );
+        const nextDate = results[next]
+          ? format(parseISO(results[next].startTime), 'EEE dd/MM')
+          : '';
+
+        if (
+          (current === 0 && currentDate !== nextDate) ||
+          (current === results.length - 1 && currentDate !== dateBefore)
+        ) {
           return (
             <Grid key={index} item className={classes.gridContainer}>
               <Card sx={{ minWidth: 250 }}>
                 <CardContent key={results[current].number}>
                   <Typography>{results[current].name}</Typography>
-                  <Typography variant="body1">
-                    {format(parseISO(results[current].startTime), 'EEE dd/MM')}
+                  <Typography variant="body1">{currentDate}</Typography>
+                  <Typography>
+                    Temperature:
+                    {` ${results[current].temperature} ${results[current].temperatureUnit}`}
                   </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          );
+        } else if (currentDate === nextDate) {
+          return (
+            <Grid key={index + 50} item className={classes.gridContainer}>
+              <Card sx={{ minWidth: 250 }}>
+                <CardContent key={results[current].number}>
+                  <Typography>{results[current].name}</Typography>
+                  <Typography variant="body1">{currentDate}</Typography>
                   <Typography>
                     Temperature:
                     {` ${results[current].temperature} ${results[current].temperatureUnit}`}
@@ -43,29 +71,10 @@ function ForecastGrid({ results }: Props) {
               <Card sx={{ minWidth: 275 }}>
                 <CardContent key={results[next].number}>
                   <Typography>{results[next].name}</Typography>
-                  <Typography variant="body1">
-                    {format(parseISO(results[next].startTime), 'EEE dd/MM')}
-                  </Typography>
+                  <Typography variant="body1">{nextDate}</Typography>
                   <Typography>
                     Temperature:
                     {` ${results[next].temperature} ${results[next].temperatureUnit}`}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          );
-        } else if ((index % 2 === 0 && next <= results.length) || index === 0) {
-          return (
-            <Grid key={index + 50} item style={{ right: '5px' }}>
-              <Card sx={{ minWidth: 275 }}>
-                <CardContent key={data.number}>
-                  <Typography>{data.name}</Typography>
-                  <Typography variant="body1">
-                    {format(parseISO(data.startTime), 'EEE dd/MM')}
-                  </Typography>
-                  <Typography>
-                    Temperature:
-                    {` ${data.temperature} ${data.temperatureUnit}`}
                   </Typography>
                 </CardContent>
               </Card>

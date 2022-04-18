@@ -60,7 +60,8 @@ function FilterSearch({ handleSearch }: Props) {
         city: yup.string().required('required to complete the city'),
         state: yup
           .string()
-          .required('required to complete the state')
+          .required('Required to complete the state Ex. MD')
+          .min(2, `Min lenght 2`)
           .max(2, `Max lenght 2`),
       })}
       onSubmit={(
